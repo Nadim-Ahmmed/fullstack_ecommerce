@@ -63,7 +63,7 @@ const Navbar = ({
 }) => {
   return (
     <section className="py-4">
-      <div className="container mx-auto">
+      <div className="container ">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
