@@ -38,23 +38,11 @@ const Navbar = ({
   menu = [
     { title: "Home", url: "#" },
     {
-      title: "Products",
+      title: "Shop",
       url: "#",
       
     },
-    {
-      title: "Resources",
-      url: "#",
-      
-    },
-    {
-      title: "Pricing",
-      url: "#",
-    },
-    {
-      title: "Blog",
-      url: "#",
-    },
+   
   ],
   auth = {
     login: { title: "Login", url: "#" },
@@ -101,6 +89,8 @@ const Navbar = ({
             <a href={logo.url} className="flex items-center gap-2">
               <img src={logo.src} className="max-h-8" alt={logo.alt} />
             </a>
+            <div>
+            <ModeToggle/>
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -137,6 +127,8 @@ const Navbar = ({
                 </div>
               </SheetContent>
             </Sheet>
+            </div>
+            
           </div>
         </div>
       </div>

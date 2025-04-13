@@ -110,11 +110,21 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-.container{
+@theme {
+  --font-poppins: "Poppins", "sans-serif"; 
+}
+
+@layer components{
+  .container{
+    @apply max-w-[1280px] mx-auto px-2.5
+  }
+}
+
+/* .container{
   max-width: 1280px;
   margin: 0 auto;
   padding: 0px 10px
-}
+} */
 
 @layer base {
   * {
