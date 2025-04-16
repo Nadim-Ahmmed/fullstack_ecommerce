@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import Banner from './components/Banner'
 import { Categoris } from './components/Categoris'
 import Footer from './components/Footer'
+import { Featuresproduct } from './components/Featuresproduct'
 
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
       <Navbar/>
       <Banner/>
       <Categoris/>
+      <Featuresproduct/>
       <Footer/>
     </ThemeProvider>
 

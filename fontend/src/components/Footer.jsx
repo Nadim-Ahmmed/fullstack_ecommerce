@@ -3,21 +3,18 @@ import React from 'react';
 const Footer = ({
   logo = {
     src: "https://www.shadcnblocks.com/images/block/block-1.svg",
-    alt: "blocks for shadcn/ui",
-    title: "Shadcnblocks.com",
+    alt: "Showmin",
+    title: "Showmin",
     url: "https://www.shadcnblocks.com",
   },
-  tagline = "Components made easy.",
+  
   menuItems = [
     {
       title: "Product",
       links: [
         { text: "Overview", url: "#" },
         { text: "Pricing", url: "#" },
-        { text: "Marketplace", url: "#" },
-        { text: "Features", url: "#" },
-        { text: "Integrations", url: "#" },
-        { text: "Pricing", url: "#" },
+       
       ],
     },
     {
@@ -25,10 +22,7 @@ const Footer = ({
       links: [
         { text: "About", url: "#" },
         { text: "Team", url: "#" },
-        { text: "Blog", url: "#" },
-        { text: "Careers", url: "#" },
-        { text: "Contact", url: "#" },
-        { text: "Privacy", url: "#" },
+      
       ],
     },
     {
@@ -36,7 +30,7 @@ const Footer = ({
       links: [
         { text: "Help", url: "#" },
         { text: "Sales", url: "#" },
-        { text: "Advertise", url: "#" },
+       
       ],
     },
     {
@@ -44,11 +38,11 @@ const Footer = ({
       links: [
         { text: "Twitter", url: "#" },
         { text: "Instagram", url: "#" },
-        { text: "LinkedIn", url: "#" },
+        
       ],
     },
   ],
-  copyright = "© 2024 Shadcnblocks.com. All rights reserved.",
+  copyright = "© 2025 Showmin.com. All rights reserved.",
   bottomLinks = [
     { text: "Terms and Conditions", url: "#" },
     { text: "Privacy Policy", url: "#" },
@@ -71,7 +65,7 @@ const Footer = ({
                 </a>
                 <p className="text-xl font-semibold">{logo.title}</p>
               </div>
-              <p className="mt-4 font-bold">{tagline}</p>
+              
             </div>
             {menuItems.map((section, sectionIdx) => (
               <div key={sectionIdx}>
