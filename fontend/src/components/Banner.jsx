@@ -18,7 +18,7 @@ let settings = {
 const Banner = () => {
   return (
     <section>
-    <div className='container'>
+    <div className='container pt-20'>
     <Slider {...settings}>
         <img
         src='https://img.lazcdn.com/us/domino/12dfcabb-afbb-4922-929e-2c0b8a53b20a_BD-1976-688.jpg_2200x2200q80.jpg'

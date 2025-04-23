@@ -11,11 +11,11 @@ import { Featuresproduct } from './components/Featuresproduct'
 const App = () => {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <Navbar/>
+      {/* <Navbar/> */}
       <Banner/>
       <Categoris/>
       <Featuresproduct/>
-      <Footer/>
+      {/* <Footer/> */}
     </ThemeProvider>
 
   )

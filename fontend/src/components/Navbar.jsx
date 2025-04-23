@@ -25,21 +25,22 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ModeToggle } from './mode-toggle';
+import { Link } from 'react-router';
 
 
 
 const Navbar = ({
   logo = {
-    url: "https://www.shadcnblocks.com",
+    url: "",
     src: "https://shadcnblocks.com/images/block/logos/shadcnblockscom-icon.svg",
     alt: "logo",
-    title: "Showmin",
+    title: "Shawmin",
   },
   menu = [
-    { title: "Home", url: "#" },
+    { title: "Home", url: "/" },
     {
       title: "Shop",
-      url: "#",
+      url: "shop",
       
     },
    
@@ -50,18 +51,18 @@ const Navbar = ({
   },
 }) => {
   return (
-    <section className="py-4">
+    <section className="py-5 fixed w-full z-50 bg-white dark:bg-[#0A0A0A] shadow-lg">
       <div className="container ">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">
           <div className="flex items-center gap-6">
             {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
+            <Link href={logo.url} className="flex items-center gap-2">
               <img src={logo.src} className="max-h-8" alt={logo.alt} />
               <span className="text-lg font-semibold tracking-tighter">
                 {logo.title}
               </span>
-            </a>
+            </Link>
             <div className="flex items-center">
               <NavigationMenu>
                 <NavigationMenuList>
@@ -86,9 +87,9 @@ const Navbar = ({
         <div className="block lg:hidden">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href={logo.url} className="flex items-center gap-2">
+            <Link href={logo.url} className="flex items-center gap-2">
               <img src={logo.src} className="max-h-8" alt={logo.alt} />
-            </a>
+            </Link>
             <div>
             <ModeToggle/>
             <Sheet>

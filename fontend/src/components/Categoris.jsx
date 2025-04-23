@@ -67,3 +67,4 @@ export const Categoris = () => {
     
   )
 }
+export default Categoris
