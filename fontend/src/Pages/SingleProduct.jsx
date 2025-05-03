@@ -1,16 +1,19 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import { FaBangladeshiTakaSign } from "react-icons/fa6";
+
 
 const SingleProduct = () => {
   let {id}= useParams();
   const[singleproduct,setsingleproduct]=useState({})
+  const[productimage,setproductimage]=useState([])
   useEffect(()=>{
     function getsingleproduct(){
-      axios.get(`https://dummyjson.com/products/${id}`).then((res) => {
-        
-        setsingleproduct(res.data)
-        
+      axios.get(`http://localhost:5000/product/singleproduct/${id}`).then((res) => {
+        console.log(res.data.product)
+        setsingleproduct(res.data.product)
+        setproductimage(res.data.product.images)
       })
       .catch((error)=>{
         console.log=(error)
@@ -20,31 +23,54 @@ const SingleProduct = () => {
     getsingleproduct()
   
   },[])
-  console.log(singleproduct)
+  
   return (
     <section className=" container py-40 bg-white  dark:bg-teal-900 antialiased">
   <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
     <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
       <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
-        <img
-          className="w-full dark:hidden"
-          src={singleproduct.thumbnail}
-          alt=""
-        />
-        <img
+
+      <img
           className="w-full hidden dark:block"
-          src={singleproduct.thumbnail}
+          src={productimage[0]}
           alt=""
         />
+        <div className='flex w-[100px] gap-4 mt-3'>
+         {productimage.map((imgsrc)=>(
+
+           <img
+          className="w-full hidden dark:block"
+          src={imgsrc}
+          alt=""
+        />
+        )
+
+         
+        )} 
+        </div>
+        
+        {/* <img
+          className="w-full dark:hidden"
+          src={productimage[0]}
+          alt=""
+        /> */}
+        
       </div>
       <div className="mt-6 sm:mt-8 lg:mt-0">
         <h1 className="text-xl font-semibold text-gray-900 sm:text-2xl dark:text-white">
          {singleproduct.title}
         </h1>
         <div className="mt-4 sm:items-center sm:gap-4 sm:flex">
-          <p className="text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
-            ${singleproduct.price}
+
+          
+          <p className=" flex text-2xl font-extrabold text-gray-900 sm:text-3xl dark:text-white">
+          <FaBangladeshiTakaSign />
+          {singleproduct.discountprice}
           </p>
+          <del className=" flex text-2xl font-extrabold text-gray-500 sm:text-3xl dark:text-gray-500">
+          <FaBangladeshiTakaSign />
+            {singleproduct.sellingprice}
+          </del>
           <div className="flex items-center gap-2 mt-2 sm:mt-0">
             <div className="flex items-center gap-1">
               <svg
@@ -144,7 +170,7 @@ const SingleProduct = () => {
         </div>
         <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
         <p className="mb-6 text-gray-500 dark:text-gray-400">
-          {singleproduct.description}
+          {singleproduct.discription}
         </p>
         
       </div>

@@ -24,7 +24,7 @@ const[showallproduct,setshowallproduct]=useState(false)
 
 useEffect(()=>{
   function getallproduct(){
-    axios.get("https://dummyjson.com/products").then((res) => {
+    axios.get("http://localhost:5000/product/products").then((res) => {
       setslicesproduct(res.data.products.slice(0, 6))
       setallproduct(res.data.products)
       

@@ -13,6 +13,7 @@ const product = {
 };
 
 const Product = ({productinfo}) => {
+  console.log(productinfo)
   
   return (
     <div className=" mt-4  group relative space-y-4 shadow-lg dark:shadow-teal-950 p-4">
@@ -23,26 +24,30 @@ const Product = ({productinfo}) => {
         
          <img
           className="w-full rounded-lg aspect-square"
-          src={productinfo? productinfo.thumbnail:product.image}
+          src={productinfo? productinfo.images[0]:product.image}
           
-          alt={productinfo? productinfo.thumbnail:product}
+          alt={productinfo? productinfo.images:product}
         />
         
        
       </figure>
       </Link>
       
-      <div className="flex flex-col lg:flex-row justify-between">
+      <div className=" flex-col lg:flex-row justify-between">
         <div>
           <h3 className="text-sm lg:text-lg">
-            <Link to={`/singleproduct/${productinfo&&productinfo.id}`}>
+            <Link to={`/singleproduct/${productinfo&&productinfo._id}`}>
               <span aria-hidden="true" className="absolute inset-0" />
               {productinfo?productinfo.title:product.name}
             </Link>
           </h3>
           <p className="text-sm text-muted-foreground">{product.category}</p>
         </div>
-        <p className="lg:text-lg font-semibold">${productinfo?productinfo.price:product.price}</p>
+        <div className='flex gap-3'>
+          <p className=" text-sm lg:text-lg font-semibold">${productinfo?productinfo.discountprice:product.discountprice}</p>
+        <del className="lg:text-lg font-semibold">${productinfo?productinfo.sellingprice:product.sellingprice}</del>
+        </div>
+        
       </div>
       <div className="flex gap-4">
         
