@@ -8,6 +8,7 @@ const SingleProduct = () => {
   let {id}= useParams();
   const[singleproduct,setsingleproduct]=useState({})
   const[productimage,setproductimage]=useState([])
+  const [selectedimage,setseletedimage]=useState(0)
   useEffect(()=>{
     function getsingleproduct(){
       axios.get(`http://localhost:5000/product/singleproduct/${id}`).then((res) => {
@@ -23,7 +24,9 @@ const SingleProduct = () => {
     getsingleproduct()
   
   },[])
-  
+  const handleSelectedImage=(id)=>{
+    setseletedimage(id)
+  }
   return (
     <section className=" container py-40 bg-white  dark:bg-teal-900 antialiased">
   <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
@@ -31,14 +34,14 @@ const SingleProduct = () => {
       <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
 
       <img
-          className="w-full hidden dark:block"
-          src={productimage[0]}
+          className="w-[350px] hidden dark:block"
+          src={productimage[selectedimage]}
           alt=""
         />
         <div className='flex w-[100px] gap-4 mt-3'>
-         {productimage.map((imgsrc)=>(
+         {productimage.map((imgsrc,i)=>(
 
-           <img
+           <img onClick={()=>handleSelectedImage(i)}
           className="w-full hidden dark:block"
           src={imgsrc}
           alt=""
