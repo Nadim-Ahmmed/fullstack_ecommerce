@@ -15,18 +15,25 @@ import SingleProduct from "./Pages/SingleProduct.jsx";
 import Cart from "./Pages/Cart.jsx";
 import Checkout from "./Pages/Checkout.jsx";
 import Login from "./Pages/Login.jsx";
+import Singup from "./Pages/Singup.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Rootlayout />}>
+    <Route>
+
+      <Route path="/" element={<Rootlayout />}>
       <Route index element={<App />} />
       <Route path="/shop" element={<Shop />} />
       <Route path="/singleproduct/:id" element={<SingleProduct />} />
       <Route path="/cart" element={<Cart/>} />
       <Route path="/checkout" element={<Checkout/>} />
-      {/* <Route path="/login" element={<Login/>} /> */}
-      {/* <Route path="/checkout" element={<Checkout/>} /> */}
+      
     </Route>
+
+    <Route path="/login" element={<Login/>} /> 
+    <Route path="/singup" element={<Singup/>} />
+    </Route>
+    
   )
 );
 
