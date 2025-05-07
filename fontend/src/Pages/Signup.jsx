@@ -1,17 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { CiUser } from "react-icons/ci";
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import { Link } from 'react-router';
 
 
-const Singup = () => {
+const Signup = () => {
+  const [fullname,setfullname]=useState("")
+  const [email,setemail]=useState("")
+  const [password,setpassword]=useState("")
+
+  const handleSingup=(e)=>{
+    e.preventDefault()
+    axios.post("http://localhost:5000/auth/signup",{name:fullname,email,password}).then((res)=>{
+      console.log(res)
+      toast("signup succesfully");
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+
   return (
     <section className='container py-60 flex items-center justify-center'>
-      <form className="max-w-96 w-full text-center border border-gray-300/60 rounded-2xl px-8 bg-white">
-  <h1 className="text-gray-900 text-3xl mt-10 font-medium">Singup</h1>
+      <ToastContainer />
+      <form onSubmit={handleSingup} className="max-w-96 w-full text-center border border-gray-300/60 rounded-2xl px-8 bg-white">
+  <h1 className="text-gray-900 text-3xl mt-10 font-medium">Signup</h1>
   <p className="text-gray-500 text-sm mt-2">Please sign up to continue</p>
   <div className="flex items-center w-full mt-10 bg-white border border-gray-300/80 h-12 rounded-full overflow-hidden pl-6 gap-2">
   <CiUser className=' text-black'/>
     <input
       type="text"
+      onChange={(e)=>setfullname(e.target.value)}
       placeholder="Fullname"
       className="bg-transparent text-gray-500 placeholder-gray-500 outline-none text-sm w-full h-full"
       required=""
@@ -34,6 +53,7 @@ const Singup = () => {
     </svg>
     <input
       type="email"
+      onChange={(e)=>setemail(e.target.value)}
       placeholder="Email id"
       className="bg-transparent text-gray-500 placeholder-gray-500 outline-none text-sm w-full h-full"
       required=""
@@ -54,11 +74,13 @@ const Singup = () => {
     </svg>
     <input
       type="password"
+      onChange={(e)=>setpassword(e.target.value)}
       placeholder="Password"
       className="bg-transparent text-gray-500 placeholder-gray-500 outline-none text-sm w-full h-full"
       required=""
     />
   </div>
+  
   <div className="mt-5 text-left text-indigo-500">
     <a className="text-sm" href="#">
       Forgot password?
@@ -72,9 +94,9 @@ const Singup = () => {
   </button>
   <p className="text-gray-500 text-sm mt-3 mb-11">
     Don’t have an account?{" "}
-    <a className="text-indigo-500" href="#">
+    <Link className="text-indigo-500" href="#">
       login 
-    </a>
+    </Link>
   </p>
 </form>
 
@@ -82,4 +104,5 @@ const Singup = () => {
   )
 }
 
-export default Singup
+
+export default Signup
