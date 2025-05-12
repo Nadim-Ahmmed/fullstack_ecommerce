@@ -1,20 +1,30 @@
 import React, { useState } from 'react'
 import { CiUser } from "react-icons/ci";
 import axios from 'axios'
+import { Link ,useNavigate} from 'react-router';
 import { ToastContainer, toast } from 'react-toastify';
-import { Link } from 'react-router';
+import { useDispatch } from 'react-redux';
+import { userloginInfo } from '../../slices/Userslices';
+
 
 
 const Signup = () => {
   const [fullname,setfullname]=useState("")
   const [email,setemail]=useState("")
   const [password,setpassword]=useState("")
-
+  const Navigate =useNavigate()
+  const dispatch=useDispatch()
   const handleSingup=(e)=>{
     e.preventDefault()
     axios.post("http://localhost:5000/auth/signup",{name:fullname,email,password}).then((res)=>{
       console.log(res)
-      toast("signup succesfully");
+      
+
+        // toast("signup succesfully");
+        dispatch(userloginInfo(userloginInfo(JSON.stringify(res.data.data))))
+        Navigate('/otp')
+      
+      
     }).catch((error)=>{
       console.log(error)
     })

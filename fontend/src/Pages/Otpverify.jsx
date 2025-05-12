@@ -1,15 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import {
     InputOTP,
     InputOTPGroup,
     InputOTPSeparator,
     InputOTPSlot,
   } from "@/components/ui/input-otp"
+import axios from 'axios'
+import { useNavigate } from 'react-router'
 
 const Otpverify = () => {
+  const data=useSelector((state)=>state.authslice.value?.payload)
+ 
+  const [otp,setotp]=useState(null)
+  const Naviagate=useNavigate()
+  
+
+
+
+  const handleotpsubmit=()=>{
+
+    axios.post("http://localhost:5000/auth/verifiotp",{
+      email : data.email,
+      otp: otp
+    }).then(()=>{
+      Naviagate('/')
+    }).catch((error)=>{
+      console.log(error)
+    })
+    console.log(otp)
+  }
   return (
     <div className='container  flex items-center justify-center h-screen'>
-         <InputOTP maxLength={6}>
+
+      <input onChange={((e)=>setotp(e.target.value))} className=' border border-b-cyan-600' type="text" />
+      <button onClick={handleotpsubmit}>Submit</button>
+         {/* <InputOTP maxLength={6}>
       <InputOTPGroup>
         <InputOTPSlot index={0} />
         <InputOTPSlot index={1} />
@@ -21,7 +47,7 @@ const Otpverify = () => {
         <InputOTPSlot index={4} />
         <InputOTPSlot index={5} />
       </InputOTPGroup>
-    </InputOTP>
+    </InputOTP> */}
     </div>
   )
 }

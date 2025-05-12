@@ -17,8 +17,8 @@ import Checkout from "./Pages/Checkout.jsx";
 import Login from "./Pages/Login.jsx";
 import Signup from "./Pages/Signup.jsx";
 import Otpverify from "./Pages/Otpverify.jsx";
-// import store from '../store.js'
-// import { Provider } from 'react-redux'
+import store from "../store.js";
+import { Provider } from 'react-redux'
 
 
 
@@ -44,10 +44,10 @@ const router = createBrowserRouter(
 );
 
 createRoot(document.getElementById("root")).render(
-//  <Provider store={store}>
-  
-//  </Provider>
+ <Provider store={store}>
   <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
     <RouterProvider router={router} />
   </ThemeProvider>
+ </Provider>
+  
 );
