@@ -1,17 +1,20 @@
+import axios from 'axios'
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+
 import {
     InputOTP,
     InputOTPGroup,
     InputOTPSeparator,
     InputOTPSlot,
   } from "@/components/ui/input-otp"
-import axios from 'axios'
+
+
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
 
 const Otpverify = () => {
   const data=useSelector((state)=>state.authslice.value?.payload)
- 
+ console.log(data)
   const [otp,setotp]=useState(null)
   const Naviagate=useNavigate()
   
@@ -21,14 +24,14 @@ const Otpverify = () => {
   const handleotpsubmit=()=>{
 
     axios.post("http://localhost:5000/auth/verifiotp",{
-      email : data.email,
+      email:data.email,
       otp: otp
     }).then(()=>{
       Naviagate('/')
     }).catch((error)=>{
       console.log(error)
     })
-    console.log(otp)
+    
   }
   return (
     <div className='container  flex items-center justify-center h-screen'>
@@ -53,3 +56,4 @@ const Otpverify = () => {
 }
 
 export default Otpverify
+

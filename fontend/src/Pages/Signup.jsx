@@ -20,8 +20,9 @@ const Signup = () => {
       console.log(res)
       
 
-        // toast("signup succesfully");
-        dispatch(userloginInfo(userloginInfo(JSON.stringify(res.data.data))))
+        toast("signup succesfully");
+        dispatch(userloginInfo(userloginInfo(res.data.data)))
+        localStorage.setItem("userdata",JSON.stringify(res.data.data));
         Navigate('/otp')
       
       
@@ -104,7 +105,7 @@ const Signup = () => {
   </button>
   <p className="text-gray-500 text-sm mt-3 mb-11">
     Don’t have an account?{" "}
-    <Link className="text-indigo-500" href="#">
+    <Link className="text-indigo-500" to="/login">
       login 
     </Link>
   </p>
