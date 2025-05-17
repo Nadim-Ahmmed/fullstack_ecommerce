@@ -49,7 +49,7 @@ const Navbar = ({
   },
 }) => {
 
-  const data=useSelector((state)=>state.authslice.value.data)
+  const data=useSelector((state)=>state.authslice?.value?.data)
   const [logoutmodel,setlogoutmodel]=useState(false)
   const dispatch=useDispatch()
 

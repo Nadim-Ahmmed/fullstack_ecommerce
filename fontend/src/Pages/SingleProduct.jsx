@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router'
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
+// import toast, { Toaster } from 'react-hot-toast';
 
 
 const SingleProduct = () => {
@@ -13,9 +14,10 @@ const SingleProduct = () => {
   const[singleproduct,setsingleproduct]=useState({})
   const[productimage,setproductimage]=useState([])
   const [selectedimage,setseletedimage]=useState(0)
+  const baseurl=import.meta.env.VITE_BASE_URL
   useEffect(()=>{
     function getsingleproduct(){
-      axios.get(`http://localhost:5000/product/singleproduct/${id}`).then((res) => {
+      axios.get(`${baseurl}/product/singleproduct/${id}`).then((res) => {
         console.log(res.data.product)
         setsingleproduct(res.data.product)
         setproductimage(res.data.product.images)
@@ -34,7 +36,7 @@ const SingleProduct = () => {
 
   const handleAddtocart=()=>{
     if(data){
-      const baseurl=import.meta.env.VITE_BASE_URL
+      
       axios.post(`${baseurl}/cart/addtocart`,{
         productid:id,
         // quntity,
@@ -51,7 +53,7 @@ const SingleProduct = () => {
     ).then((res)=>{
         console.log(res)
       }).catch((error)=>{
-        console.log(error)
+        toast.error('add to cart faild');
       })
 
       // toast("add to cart");
@@ -61,6 +63,7 @@ const SingleProduct = () => {
   }
   return (
     <section className=" container py-40 bg-white  dark:bg-teal-900 antialiased">
+      <Toaster/>
       <ToastContainer />
   <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
     <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
