@@ -1,11 +1,15 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
+import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const SingleProduct = () => {
   let {id}= useParams();
+  const data=useSelector((state)=>state.authslice.value)
+  const naviget=useNavigate()
   const[singleproduct,setsingleproduct]=useState({})
   const[productimage,setproductimage]=useState([])
   const [selectedimage,setseletedimage]=useState(0)
@@ -27,8 +31,37 @@ const SingleProduct = () => {
   const handleSelectedImage=(id)=>{
     setseletedimage(id)
   }
+
+  const handleAddtocart=()=>{
+    if(data){
+      const baseurl=import.meta.env.VITE_BASE_URL
+      axios.post(`${baseurl}/cart/addtocart`,{
+        productid:id,
+        // quntity,
+        userid:data.data._id
+      }
+      
+      ,{
+        headers:{
+          token:data.token,
+
+        }
+      }
+    
+    ).then((res)=>{
+        console.log(res)
+      }).catch((error)=>{
+        console.log(error)
+      })
+
+      // toast("add to cart");
+    }else{
+      naviget("/login")
+    }
+  }
   return (
     <section className=" container py-40 bg-white  dark:bg-teal-900 antialiased">
+      <ToastContainer />
   <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
     <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
       <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
@@ -145,10 +178,9 @@ const SingleProduct = () => {
         </div>
         <div className="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8 ">
          
-          <a
-            href="#"
-            title=""
-            className="text-black dark:text-white mt-4 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+          <button
+            onClick={handleAddtocart}
+            className="text-black dark:text-white mt-4 sm:mt-0 bg-black cursor-pointer hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
             role="button"
           >
             <svg
@@ -169,7 +201,7 @@ const SingleProduct = () => {
               />
             </svg>
             Add to cart
-          </a>
+          </button>
         </div>
         <hr className="my-6 md:my-8 border-gray-200 dark:border-gray-800" />
         <p className="mb-6 text-gray-500 dark:text-gray-400">

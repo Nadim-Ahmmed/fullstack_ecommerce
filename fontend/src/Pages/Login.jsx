@@ -19,12 +19,14 @@ const Login = () => {
       .then((response) => {
         // On successful login
         console.log('Login successful:', response.data);
+
+        const userdata=response.data
         
         // Store user info and token in Redux
-        dispatch(userloginInfo(response.data.data)); 
+        dispatch(userloginInfo(userdata)); 
 
         // Optionally, store data in localStorage for persistence
-        localStorage.setItem('userdata', JSON.stringify(response.data.data));
+        localStorage.setItem('userdata', JSON.stringify(userdata));
 
         // Show success message
         toast.success('Login successful! Redirecting...');

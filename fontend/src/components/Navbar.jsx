@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Book, Menu, Sunset, Trees, Zap } from "lucide-react";
 
@@ -26,7 +26,8 @@ import {
 } from "@/components/ui/sheet";
 import { ModeToggle } from "./mode-toggle";
 import { Link } from "react-router";
-import { useSelector } from 'react-redux'
+import { useSelector ,useDispatch } from 'react-redux'
+import { userloginInfo } from "../../slices/Userslices";
 
 const Navbar = ({
   logo = {
@@ -48,13 +49,25 @@ const Navbar = ({
   },
 }) => {
 
-  const data=useSelector((state)=>state.authslice.value)
+  const data=useSelector((state)=>state.authslice.value.data)
+  const [logoutmodel,setlogoutmodel]=useState(false)
+  const dispatch=useDispatch()
+
+  const handleLogoutModel=()=>{
+  setlogoutmodel(true)
+  }
+
+  const handleLogout=()=>{
+     localStorage.removeItem('userdata');
+     dispatch(userloginInfo(null)); 
+  }
 console.log(data)
   return (
     <section className="py-5 fixed w-full z-50 bg-white dark:bg-[#0A0A0A] shadow-lg">
       <div className="container ">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">
+          
           <div className="flex items-center gap-6">
             {/* Logo */}
             <Link href={logo.url} className="flex items-center gap-2">
@@ -63,6 +76,7 @@ console.log(data)
                 {logo.title}
               </span>
             </Link>
+            <ModeToggle />
             <div className="flex items-center">
               <NavigationMenu>
                 <NavigationMenuList>
@@ -71,21 +85,27 @@ console.log(data)
               </NavigationMenu>
             </div>
           </div>
+          
           {
-          data?
-        <h2>{data.name}</h2>
-        :
-        <div className="flex gap-2">
+          data?(
+            <div>
+                {logoutmodel?(
+              <Button onClick={handleLogout} className="cursor-pointer">Logout</Button>
+            ) :(
+                     <Button onClick={handleLogoutModel} className=" cursor-pointer">{data.name}</Button>
+              )}
+            </div>  
+          ):(
+          <div className="flex gap-2">
             <Button asChild variant="outline" size="sm">
               <a href={auth.login.url}>{auth.login.title}</a>
             </Button>
             <Button asChild size="sm">
               <a href={auth.signup.url}>{auth.signup.title}</a>
             </Button>
-            <ModeToggle />
+            
           </div>
-        }
-          
+        ) }   
         </nav>
 
         {/* Mobile Menu */}
