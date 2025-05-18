@@ -2,16 +2,18 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { FaCartArrowDown } from "react-icons/fa";
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 const CartIcon = () => {
     const data=useSelector((state)=>state.authslice?.value?.data)
     const baseurl=import.meta.env.VITE_BASE_URL
+    
 
 const[cartlist,setCartlist]=useState([])
   useEffect(()=>{
+    
     function getCartlist(){
-      axios.get(`${baseurl}/cart/usercartlist/${data._id}`).then((res) => {
+      axios.get(`${baseurl}/cart/usercartlist/${data?._id}`).then((res) => {
         setCartlist(res.data.data)
         
       })
@@ -28,7 +30,7 @@ const[cartlist,setCartlist]=useState([])
         <Link to="/cart">
         <FaCartArrowDown className=' text-white text-2xl'/>
         </Link>
-        <h2 className='  text-xl absolute top-[-16px] right-[-5px]'>{cartlist.length}{""}</h2>
+        <h2 className='  text-xl absolute top-[-16px] right-[-5px]'>{cartlist?.length}{""}</h2>
     </div>
     }
     </>

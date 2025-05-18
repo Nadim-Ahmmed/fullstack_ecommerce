@@ -13,7 +13,7 @@ const product = {
 };
 
 const Product = ({productinfo}) => {
-  console.log(productinfo)
+  // console.log(productinfo)
   
   return (
     <div className=" mt-4  group relative space-y-4 shadow-lg dark:shadow-teal-950 p-4">

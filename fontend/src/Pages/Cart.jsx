@@ -1,14 +1,19 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
 
 const Cart = () => {
 const baseurl=import.meta.env.VITE_BASE_URL
 const data=useSelector((state)=>state.authslice?.value?.data)
 const[cartlist,setCartlist]=useState([])
+const navigate=useNavigate()
   useEffect(()=>{
+    if(!data){
+      navigate("/login")
+    }
     function getCartlist(){
-      axios.get(`${baseurl}/cart/usercartlist/${data._id}`).then((res) => {
+      axios.get(`${baseurl}/cart/usercartlist/${data?._id}`).then((res) => {
         setCartlist(res.data.data)
         
       })
