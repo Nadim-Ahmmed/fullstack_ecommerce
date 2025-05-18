@@ -27,7 +27,11 @@ const[cartlist,setCartlist]=useState([])
     <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
       <div className="mx-auto w-full flex-none lg:max-w-2xl xl:max-w-4xl">
         <div className="space-y-6">
-          {cartlist.map((item)=>(
+          {cartlist.length==0?
+          <div className='rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6'>
+            <h2 className=' text-3xl'>Your Cart is Empty </h2>
+            </div>
+          :cartlist.map((item)=>(
             
             <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
             {console.log(item)}
