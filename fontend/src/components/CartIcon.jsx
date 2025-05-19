@@ -21,7 +21,7 @@ const[cartlist,setCartlist]=useState([])
         console.log=(error)
       })}
     getCartlist()
-  },[])
+  },[cartlist])
   return (
     <>
      {

@@ -21,7 +21,21 @@ const navigate=useNavigate()
         console.log=(error)
       })}
     getCartlist()
-  },[])
+  },[cartlist])
+
+  const handleremoveCart=(id)=>{
+    axios.delete(`${baseurl}/cart/usercartdelete`,{
+      data:{
+        cartid:id,
+        userid:data._id,
+      }
+    }).then((res)=>{
+      console.log(res);
+      // window.location.reload();
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
 
   return (
     <section className="container  bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
@@ -39,7 +53,7 @@ const navigate=useNavigate()
           :cartlist.map((item)=>(
             
             <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 md:p-6">
-            {console.log(item)}
+            
             <div className="space-y-4 md:flex md:items-center md:justify-between md:gap-6 md:space-y-0">
               <a href="#" className="shrink-0 md:order-1">
                 <img
@@ -149,7 +163,8 @@ const navigate=useNavigate()
                     </svg>
                     Add to Favorites
                   </button>
-                  <button
+                  <button 
+                  onClick={()=>handleremoveCart(item._id)}
                     type="button"
                     className="inline-flex items-center text-sm font-medium text-red-600 hover:underline dark:text-red-500"
                   >
