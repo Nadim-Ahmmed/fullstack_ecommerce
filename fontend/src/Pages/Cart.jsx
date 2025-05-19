@@ -36,6 +36,14 @@ const navigate=useNavigate()
       console.log(error);
     })
   }
+  const handlequntityupdate=(id,action)=>{
+axios.patch(`${baseurl}/cart/updatecartquntity/${id}`,{type:action}).then((res)=>{
+      console.log(res);
+      window.location.reload();
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
 
   return (
     <section className="container  bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
@@ -73,6 +81,7 @@ const navigate=useNavigate()
               <div className="flex items-center justify-between md:order-3 md:justify-end">
                 <div className="flex items-center">
                   <button
+                  onClick={()=>handlequntityupdate(item._id,"dec")}
                     type="button"
                     id="decrement-button"
                     data-input-counter-decrement="counter-input"
@@ -104,6 +113,7 @@ const navigate=useNavigate()
                     required=""
                   />
                   <button
+                  onClick={()=>handlequntityupdate(item._id,"inc")}
                     type="button"
                     id="increment-button"
                     data-input-counter-increment="counter-input"
@@ -128,7 +138,7 @@ const navigate=useNavigate()
                 </div>
                 <div className="text-end md:order-4 md:w-32">
                   <p className="text-base font-bold text-gray-900 dark:text-white">
-                   {item.productid.discountprice}
+                   {item.productid.discountprice*item.quntity}
                   </p>
                 </div>
               </div>
