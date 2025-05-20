@@ -27,7 +27,7 @@ const Otpverify = () => {
       email:data.email,
       otp: otp
     }).then(()=>{
-      Naviagate('/')
+      Naviagate('/login')
     }).catch((error)=>{
       console.log(error)
     })

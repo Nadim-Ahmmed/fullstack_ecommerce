@@ -61,7 +61,7 @@ const Navbar = ({
      localStorage.removeItem('userdata');
      dispatch(userloginInfo(null)); 
   }
-console.log(data)
+
   return (
     <section className="py-5 fixed w-full z-50 bg-white dark:bg-[#0A0A0A] shadow-lg">
       <div className="container ">

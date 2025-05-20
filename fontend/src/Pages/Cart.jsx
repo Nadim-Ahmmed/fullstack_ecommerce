@@ -44,6 +44,15 @@ axios.patch(`${baseurl}/cart/updatecartquntity/${id}`,{type:action}).then((res)=
       console.log(error);
     })
   }
+  const totalprice=cartlist.reduce(function(total, item) {
+    
+  return total + Math.round(item.productid.sellingprice*item.quntity);
+}, 0);
+  const totaldiscountprice=cartlist.reduce(function(total, item) {
+    
+  return total + Math.round(item.productid.discountprice*item.quntity);
+}, 0);
+console.log(totalprice)
 
   return (
     <section className="container  bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
@@ -214,47 +223,40 @@ axios.patch(`${baseurl}/cart/updatecartquntity/${id}`,{type:action}).then((res)=
           </p>
           <div className="space-y-4">
             <div className="space-y-2">
-              <dl className="flex items-center justify-between gap-4">
-                <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
+              <div className="flex items-center justify-between gap-4">
+                <div className="text-base font-normal text-gray-500 dark:text-gray-400">
                   Original price
-                </dt>
-                <dd className="text-base font-medium text-gray-900 dark:text-white">
-                  $7,592.00
-                </dd>
-              </dl>
-              <dl className="flex items-center justify-between gap-4">
-                <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                  Savings
-                </dt>
-                <dd className="text-base font-medium text-green-600">
-                  -$299.00
-                </dd>
-              </dl>
-              <dl className="flex items-center justify-between gap-4">
-                <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
-                  Store Pickup
-                </dt>
-                <dd className="text-base font-medium text-gray-900 dark:text-white">
-                  $99
-                </dd>
-              </dl>
-              <dl className="flex items-center justify-between gap-4">
-                <dt className="text-base font-normal text-gray-500 dark:text-gray-400">
+                </div>
+                <div className="text-base font-medium text-gray-900 dark:text-white">
+                  {totalprice}
+                </div>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <div className="text-base font-normal text-gray-500 dark:text-gray-400">
+                  discountprice
+                </div>
+                <div className="text-base font-medium text-green-600">
+                  {totalprice-totaldiscountprice}
+                </div>
+              </div>
+              
+              {/* <div className="flex items-center justify-between gap-4">
+                <div className="text-base font-normal text-gray-500 dark:text-gray-400">
                   Tax
-                </dt>
-                <dd className="text-base font-medium text-gray-900 dark:text-white">
+                </div>
+                <div className="text-base font-medium text-gray-900 dark:text-white">
                   $799
-                </dd>
-              </dl>
+                </div>
+              </div> */}
             </div>
-            <dl className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
-              <dt className="text-base font-bold text-gray-900 dark:text-white">
+            <div className="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
+              <div className="text-base font-bold text-gray-900 dark:text-white">
                 Total
-              </dt>
+              </div>
               <dd className="text-base font-bold text-gray-900 dark:text-white">
-                $8,191.00
+                {totaldiscountprice}
               </dd>
-            </dl>
+            </div>
           </div>
           <a
             href="#"

@@ -2,7 +2,9 @@ import React from 'react'
 
 import { Button } from "@/components/ui/button";
 import { HeartIcon, PlusIcon } from "lucide-react";
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const product = {
   name: "Red Hat",
@@ -13,12 +15,42 @@ const product = {
 };
 
 const Product = ({productinfo}) => {
-  // console.log(productinfo)
+  const data=useSelector((state)=>state.authslice.value)
+  const baseurl=import.meta.env.VITE_BASE_URL
+  const naviget=useNavigate()
+  const handleAddtoCart=(id)=>{
+    if(data){
+      
+      axios.post(`${baseurl}/cart/addtocart`,{
+        productid:id,
+        // quntity,
+        userid:data.data._id
+      }
+      
+      ,{
+        headers:{
+          token:data.token,
+
+        }
+      }
+    
+    ).then((res)=>{
+        console.log(res)
+      }).catch((error)=>{
+        // toast.error('add to cart faild');
+        console.log(error)
+      })
+
+      // toast("add to cart");
+    }else{
+      naviget("/login")
+    }
+  }
   
   return (
     <div className=" mt-4  group relative space-y-4 shadow-lg dark:shadow-teal-950 p-4">
       
-      <Link >
+      <Link to={`/singleproduct/${productinfo&&productinfo._id}`}>
       <figure className="group-hover:opacity-90">
         
         
@@ -49,9 +81,9 @@ const Product = ({productinfo}) => {
         </div>
         
       </div>
-      <div className="flex gap-4">
+      <div onClick={()=>handleAddtoCart(productinfo._id)} className="flex gap-4">
         
-        <Button variant="outline" className="w-full">
+        <Button variant="outline" className="w-full !z-50">
           <PlusIcon className="size-4 me-1" /> Add to Card
         </Button>
       </div>
