@@ -26,7 +26,7 @@ const[cartlist,setCartlist]=useState([])
     <>
      {
         data &&
-         <div className=' bg-gray-700 fixed right-0 top-2/4 translate-x-[-50%] cursor-pointer  rounded-xl w-[50px] h-[50px] flex justify-center items-center'>
+         <div className=' bg-gray-700 fixed !z-50 right-0 top-2/4 translate-x-[-50%] cursor-pointer  rounded-xl w-[50px] h-[50px] flex justify-center items-center'>
         <Link to="/cart">
         <FaCartArrowDown className=' text-white text-2xl'/>
         </Link>
