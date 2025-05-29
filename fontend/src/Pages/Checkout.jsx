@@ -17,6 +17,12 @@ const[cartlist,setCartlist]=useState([])
 const[divisionlist,setDivisionlist]=useState([])
 const[selectdivision,setSelectDivision]=useState('')
 const [deliveryCharge,setDeliveryCharge]=useState(0)
+const [paymentmethord,setPaymentMethor]=useState("")
+const [fullname,setFullName]=useState("")
+const [phone,setPhone]=useState("")
+const [address,setAddress]=useState("")
+const [state,setState]=useState("")
+const [zip,setZip]=useState("")
 
 const navigate=useNavigate()
    useEffect(()=>{
@@ -43,7 +49,7 @@ const navigate=useNavigate()
   },[])
 
  
-  console.log(divisionlist)
+  
    const totaldiscountprice=cartlist.reduce(function(total, item) {
     
   return total + Math.round(item.productid.discountprice*item.quntity);
@@ -51,7 +57,7 @@ const navigate=useNavigate()
 
 const handledivision=(value)=>{
   setSelectDivision(value)
-  console.log(value)
+
   if(value == 6){
     setDeliveryCharge(60)
   }else{
@@ -59,7 +65,14 @@ const handledivision=(value)=>{
   }
  
 }
-console.log(selectdivision)
+//  const handelpayment=(item)=>{
+// setPaymentMethor(item.id)
+//  }
+
+const handlepayment=(value)=>{
+  setPaymentMethor(value)
+}
+console.log(fullname,phone,address,state,zip,paymentmethord,deliveryCharge)
   return (
     <div className="bg-white sm:px-8 px-4 py-6">
   <div className="max-w-screen-xl max-md:max-w-xl mx-auto">
@@ -110,6 +123,7 @@ console.log(selectdivision)
                   First Name *
                 </label>
                 <input
+                onChange={(e)=>setFullName(e.target.value)}
                   type="text"
                   placeholder="Enter First Name"
                   className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600"
@@ -121,6 +135,7 @@ console.log(selectdivision)
                   Phone No. *
                 </label>
                 <input
+                onChange={(e)=>setPhone(e.target.value)}
                   type="number"
                   placeholder="Enter Phone No."
                   className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600"
@@ -131,6 +146,7 @@ console.log(selectdivision)
                   Address *
                 </label>
                 <input
+                onChange={(e)=>setAddress(e.target.value)}
                   type="text"
                   placeholder="Enter Address Line"
                   className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600"
@@ -161,6 +177,7 @@ console.log(selectdivision)
                   State
                 </label>
                 <input
+                onChange={(e)=>setState(e.target.value)}
                   type="text"
                   placeholder="Enter State"
                   className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600"
@@ -171,6 +188,7 @@ console.log(selectdivision)
                   Zip Code
                 </label>
                 <input
+                onChange={(e)=>setZip(e.target.value)}
                   type="text"
                   placeholder="Enter Zip Code"
                   className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600"
@@ -178,7 +196,7 @@ console.log(selectdivision)
               </div>
             </div>
           </div>
-          <div className="mt-12">
+          {/* <div className="mt-12">
             <h2 className="text-xl text-slate-900 font-semibold mb-6">
               Payment
             </h2>
@@ -187,80 +205,56 @@ console.log(selectdivision)
                 <div>
                   <div className="flex items-center">
                     <input
+                      onClick={()=>handelpayment()}
+                      
                       type="radio"
                       name="method"
                       className="w-5 h-5 cursor-pointer"
-                      id="card"
+                      id="COD"
                       defaultChecked=""
-                    />
-                    <label
-                      htmlFor="card"
-                      className="ml-4 flex gap-2 cursor-pointer"
-                    >
-                      <img
-                        src="https://readymadeui.com/images/visa.webp"
-                        className="w-12"
-                        alt="card1"
-                      />
-                      <img
-                        src="https://readymadeui.com/images/american-express.webp"
-                        className="w-12"
-                        alt="card2"
-                      />
-                      <img
-                        src="https://readymadeui.com/images/master.webp"
-                        className="w-12"
-                        alt="card3"
-                      />
-                    </label>
+                     
+                    />{console.log(item)}
+                    <h3 className="text-xl text-slate-900 ml-5" >Cash on Delivwry</h3>
                   </div>
                 </div>
-                <p className="mt-4 text-sm text-slate-500 font-medium">
-                  Pay with your debit or credit card
-                </p>
+               
               </div>
               <div className="bg-gray-100 p-4 rounded-md border border-gray-300 max-w-sm">
                 <div>
                   <div className="flex items-center">
                     <input
+                    onClick={()=>handelpayment(item)}
                       type="radio"
                       name="method"
                       className="w-5 h-5 cursor-pointer"
-                      id="paypal"
+                      id="online"
                     />
-                    <label
-                      htmlFor="paypal"
-                      className="ml-4 flex gap-2 cursor-pointer"
-                    >
-                      <img
-                        src="https://readymadeui.com/images/paypal.webp"
-                        className="w-20"
-                        alt="paypalCard"
-                      />
-                    </label>
+                  <h3 className="text-xl text-slate-900 ml-5">Online Payment</h3>
                   </div>
                 </div>
-                <p className="mt-4 text-sm text-slate-500 font-medium">
-                  Pay with your paypal account
-                </p>
+                
               </div>
             </div>
-          </div>
+          </div> */}
+           <Select onValueChange={handlepayment} value={paymentmethord}>
+                 <SelectTrigger className="px-4 py-2.5 mt-5 bg-white border border-gray-400 text-slate-900 w-80 text-sm rounded-md focus:outline-blue-600">
+                   <SelectValue placeholder="Select paymet Method" />
+                 </SelectTrigger>
+                 <SelectContent>
+                   <SelectItem key={"COD"} value="COD">COD</SelectItem>
+                   <SelectItem key={"Online"} value="Online">Online</SelectItem>
+
+                 </SelectContent>
+                </Select>
           <div className="mt-12 max-w-md">
-            <p className="text-slate-900 text-sm font-medium mb-2">
-              Do you have a promo code?
-            </p>
+            
             <div className="flex gap-4">
-              <input
-                type="email"
-                placeholder="Promo code"
-                className="px-4 py-2.5 bg-white border border-gray-400 text-slate-900 w-full text-sm rounded-md focus:outline-blue-600"
-              />
+              
               <button
                 type="button"
                 className="flex items-center justify-center font-medium tracking-wide bg-blue-600 hover:bg-blue-700 px-4 py-2.5 rounded-md text-sm text-white cursor-pointer"
               >
-                Apply
+                Pay
               </button>
             </div>
           </div>
