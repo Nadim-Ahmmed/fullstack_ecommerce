@@ -72,7 +72,25 @@ const handledivision=(value)=>{
 const handlepayment=(value)=>{
   setPaymentMethor(value)
 }
-console.log(fullname,phone,address,state,zip,paymentmethord,deliveryCharge)
+
+
+const handlePlaceOrder=()=>{
+  axios.post("http://localhost:5000/order/placeorder",{
+    fullname,
+    phone,
+    address,
+    state,
+    zip,
+    paymentmethord,
+    deliveryCharge,
+    cartlist,
+    userid:data._id
+  }).then((res)=>{
+    console.log(res)
+  }).catch((error)=>{
+    console.log(error)
+  })
+}
   return (
     <div className="bg-white sm:px-8 px-4 py-6">
   <div className="max-w-screen-xl max-md:max-w-xl mx-auto">
@@ -251,6 +269,7 @@ console.log(fullname,phone,address,state,zip,paymentmethord,deliveryCharge)
             <div className="flex gap-4">
               
               <button
+              onClick={handlePlaceOrder}
                 type="button"
                 className="flex items-center justify-center font-medium tracking-wide bg-blue-600 hover:bg-blue-700 px-4 py-2.5 rounded-md text-sm text-white cursor-pointer"
               >
