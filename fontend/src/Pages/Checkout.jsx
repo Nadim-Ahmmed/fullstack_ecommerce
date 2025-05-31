@@ -74,7 +74,9 @@ const handlepayment=(value)=>{
 }
 
 
+
 const handlePlaceOrder=()=>{
+  const producinfo=cartlist.map((item)=>({productid:item.productid._id}))
   axios.post("http://localhost:5000/order/placeorder",{
     fullname,
     phone,
@@ -83,14 +85,16 @@ const handlePlaceOrder=()=>{
     zip,
     paymentmethord,
     deliveryCharge,
-    cartlist,
-    userid:data._id
+    cartlist:producinfo,
+    userid:data._id,
+    totalprice:totaldiscountprice
   }).then((res)=>{
     console.log(res)
   }).catch((error)=>{
     console.log(error)
   })
 }
+console.log(cartlist)
   return (
     <div className="bg-white sm:px-8 px-4 py-6">
   <div className="max-w-screen-xl max-md:max-w-xl mx-auto">
